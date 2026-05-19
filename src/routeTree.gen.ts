@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseIdRouteImport } from './routes/case.$id'
 
+const IntegrationsRoute = IntegrationsRouteImport.update({
+  id: '/integrations',
+  path: '/integrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HomeRoute = HomeRouteImport.update({
   id: '/home',
   path: '/home',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
   '/home': typeof HomeRoute
+  '/integrations': typeof IntegrationsRoute
   '/case/$id': typeof CaseIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
   '/home': typeof HomeRoute
+  '/integrations': typeof IntegrationsRoute
   '/case/$id': typeof CaseIdRoute
 }
 export interface FileRoutesById {
@@ -52,25 +60,34 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
   '/home': typeof HomeRoute
+  '/integrations': typeof IntegrationsRoute
   '/case/$id': typeof CaseIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/alerts' | '/home' | '/case/$id'
+  fullPaths: '/' | '/alerts' | '/home' | '/integrations' | '/case/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/alerts' | '/home' | '/case/$id'
-  id: '__root__' | '/' | '/alerts' | '/home' | '/case/$id'
+  to: '/' | '/alerts' | '/home' | '/integrations' | '/case/$id'
+  id: '__root__' | '/' | '/alerts' | '/home' | '/integrations' | '/case/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AlertsRoute: typeof AlertsRoute
   HomeRoute: typeof HomeRoute
+  IntegrationsRoute: typeof IntegrationsRoute
   CaseIdRoute: typeof CaseIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/integrations': {
+      id: '/integrations'
+      path: '/integrations'
+      fullPath: '/integrations'
+      preLoaderRoute: typeof IntegrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/home': {
       id: '/home'
       path: '/home'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlertsRoute: AlertsRoute,
   HomeRoute: HomeRoute,
+  IntegrationsRoute: IntegrationsRoute,
   CaseIdRoute: CaseIdRoute,
 }
 export const routeTree = rootRouteImport

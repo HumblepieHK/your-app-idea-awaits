@@ -18,7 +18,12 @@ function LoginPage() {
   const [email, setEmail] = useState("demo");
   const [password, setPassword] = useState("");
   const [org, setOrg] = useState("demo limited");
+  const [remember, setRemember] = useState(true);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    setRemember(getRemember());
+  }, []);
 
   useEffect(() => {
     if (getSession()) navigate({ to: "/home" });

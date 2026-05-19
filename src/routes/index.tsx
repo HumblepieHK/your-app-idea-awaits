@@ -95,6 +95,19 @@ function LoginPage() {
             </select>
           </label>
 
+          <label className="flex cursor-pointer items-center gap-2 pt-1">
+            <input
+              type="checkbox"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+              className="h-4 w-4 cursor-pointer accent-primary"
+            />
+            <span className="text-xs font-bold text-foreground">Remember me</span>
+            <span className="ml-auto text-[10px] text-muted-foreground">
+              Stay signed in on this device
+            </span>
+          </label>
+
           {error && <p className="text-xs font-bold text-destructive">{error}</p>}
 
           <button

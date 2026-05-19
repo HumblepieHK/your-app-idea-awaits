@@ -15,9 +15,9 @@ export const Route = createFileRoute("/")({
 
 function LoginPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("demo");
   const [password, setPassword] = useState("");
-  const [org, setOrg] = useState("Zetrov Treasury");
+  const [org, setOrg] = useState("demo limited");
   const [error, setError] = useState("");
 
   useEffect(() => {

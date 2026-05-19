@@ -35,7 +35,7 @@ function LoginPage() {
       setError("Email and password are required.");
       return;
     }
-    setSession({ email, org });
+    setSession({ email, org }, remember);
     navigate({ to: "/home" });
   };
 

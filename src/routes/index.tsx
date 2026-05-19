@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ShieldCheck, Mail, Lock, ArrowRight } from "lucide-react";
-import { getSession, setSession } from "@/lib/auth";
+import { getRemember, getSession, setSession } from "@/lib/auth";
 
 export const Route = createFileRoute("/")({
   component: LoginPage,
@@ -18,7 +18,12 @@ function LoginPage() {
   const [email, setEmail] = useState("demo");
   const [password, setPassword] = useState("");
   const [org, setOrg] = useState("demo limited");
+  const [remember, setRemember] = useState(true);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    setRemember(getRemember());
+  }, []);
 
   useEffect(() => {
     if (getSession()) navigate({ to: "/home" });
@@ -30,7 +35,7 @@ function LoginPage() {
       setError("Email and password are required.");
       return;
     }
-    setSession({ email, org });
+    setSession({ email, org }, remember);
     navigate({ to: "/home" });
   };
 
@@ -88,6 +93,19 @@ function LoginPage() {
               <option>HKDR Issuer Ltd</option>
               <option>TranSentinel Demo</option>
             </select>
+          </label>
+
+          <label className="flex cursor-pointer items-center gap-2 pt-1">
+            <input
+              type="checkbox"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+              className="h-4 w-4 cursor-pointer accent-primary"
+            />
+            <span className="text-xs font-bold text-foreground">Remember me</span>
+            <span className="ml-auto text-[10px] text-muted-foreground">
+              Stay signed in on this device
+            </span>
           </label>
 
           {error && <p className="text-xs font-bold text-destructive">{error}</p>}

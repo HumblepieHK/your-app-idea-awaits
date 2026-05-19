@@ -47,16 +47,16 @@ function LoginPage() {
 
         <form onSubmit={submit} className="space-y-3 rounded-3xl bg-card p-5">
           <label className="block">
-            <span className="text-[10px] font-black text-muted-foreground">WORK EMAIL</span>
+            <span className="text-[10px] font-black text-muted-foreground">USER ID</span>
             <div className="mt-1 flex items-center gap-2 rounded-2xl border bg-surface-muted px-3">
               <Mail className="h-4 w-4 text-muted-foreground" />
               <input
-                type="email"
+                type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="compliance@zetrov.hk"
+                placeholder="demo"
                 className="w-full bg-transparent py-3 text-sm outline-none"
-                autoComplete="email"
+                autoComplete="username"
               />
             </div>
           </label>
@@ -83,6 +83,7 @@ function LoginPage() {
               onChange={(e) => setOrg(e.target.value)}
               className="mt-1 w-full rounded-2xl border bg-surface-muted px-3 py-3 text-sm outline-none"
             >
+              <option>demo limited</option>
               <option>Zetrov Treasury</option>
               <option>HKDR Issuer Ltd</option>
               <option>TranSentinel Demo</option>
